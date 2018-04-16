@@ -59,7 +59,7 @@ ui <- fluidPage(
         ),
         sliderInput(
           "rent_appreciation",
-          "What is the approximate yearly increase in rent (%)?",
+          "What is the approximate yearly cost of living increase (%)? (Applied to rent, utilities, maintenance)",
           min = 0,
           max = 10,
           value = 2, 
@@ -201,6 +201,7 @@ server <- function(input, output) {
       house_value = input$price * (1 + input$appreciation / 100) ^ years,
       cumulative_appreciation = house_value - input$price,
       cumulative_depreceation = -cumulative_appreciation,
+      monthly_depreceation = cumulative_depreceation - lag(cumulative_depreceation),
       house_value_yearly = input$price * (1 + input$appreciation / 100) ^ year_number,
       monthly_utilities = input$utilities * (1 + input$rent_appreciation / 100) ^ years,
       cumulative_utilities = cumsum(monthly_utilities),
@@ -219,7 +220,7 @@ server <- function(input, output) {
         cumulative_interest + cumulative_utilities +
         cumulative_maintenance + cumulative_property_tax
     )
-
+    
     # return df    
     df
   })
