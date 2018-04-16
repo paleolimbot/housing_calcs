@@ -291,10 +291,18 @@ server <- function(input, output) {
          min() %>%
          round() %>%
          format(big.mark = ",", trim = TRUE)
+       sale <- df %>% 
+         filter(buying_is_cheaper) %>% 
+         pull(house_value) %>% 
+         min() %>%
+         round() %>%
+         format(big.mark = ",", trim = TRUE, scientific = FALSE)
        
        message <- paste(
          "<p>You will save money live in this house for at least <b>", years, " years</b>, 
-         after you spent <b>$", cost, "</b> that you will never get back.</p>",
+         after you spent <b>$", cost, 
+         "</b> that you will never get back, assuming you sell the house for <b>$", sale, 
+         "</b>.</p>",
          sep = ""
        )
      } else {
