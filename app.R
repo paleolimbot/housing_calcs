@@ -75,7 +75,7 @@ ui <- fluidPage(
         ),
         sliderInput(
           "mortgage_rate",
-          "What is the mortgage interest rate?",
+          "What is the mortgage interest rate (%)?",
           min = 1,
           max = 10,
           value = 4,
@@ -121,7 +121,7 @@ ui <- fluidPage(
         ),
         sliderInput(
           "property_tax_rate",
-          "What is the property tax rate?",
+          "What is the property tax rate (%)?",
           min = 0,
           max = 20,
           value = 2.5,
@@ -129,7 +129,7 @@ ui <- fluidPage(
         ),
         sliderInput(
           "appreciation",
-          "What is the anticipated rate of property appreciation?",
+          "What is the anticipated rate of property appreciation (%)?",
           min = -10,
           max = 10,
           value = 2,
@@ -137,7 +137,7 @@ ui <- fluidPage(
         ),
         sliderInput(
           "realator_cost_rate",
-          "What percent will the real-estate agent take when you well the house?",
+          "What percent will the real-estate agent take when you sell the house?",
           min = 0,
           max = 10,
           value = 7,
@@ -299,7 +299,7 @@ server <- function(input, output) {
          format(big.mark = ",", trim = TRUE, scientific = FALSE)
        
        message <- paste(
-         "<p>You will save money live in this house for at least <b>", years, " years</b>, 
+         "<p>You will save money if you live in this house for at least <b>", years, " years</b>, 
          after you spent <b>$", cost, 
          "</b> that you will never get back, assuming you sell the house for <b>$", sale, 
          "</b>.</p>",
