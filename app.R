@@ -70,8 +70,8 @@ ui <- fluidPage(
            "How much are you paying for the house?",
            min = 50000,
            max = 500000,
-           value = 150000,
-           step = 10000
+           value = 165000,
+           step = 5000
         ),
         sliderInput(
           "mortgage_rate",
@@ -86,7 +86,7 @@ ui <- fluidPage(
           "What is the amortization period of the morgage?",
           min = 10,
           max = 30,
-          value = 25
+          value = 15
         ),
         sliderInput(
           "down_payment",
@@ -124,8 +124,8 @@ ui <- fluidPage(
           "What is the property tax rate (%)?",
           min = 0,
           max = 20,
-          value = 2.5,
-          step = 0.1
+          value = 1.25,
+          step = 0.25
         ),
         sliderInput(
           "appreciation",
@@ -177,13 +177,13 @@ server <- function(input, output) {
     
     df <- tibble(
       # time variables
-      month_number = seq_len(total_months),
+      month_number = c(0, seq_len(total_months)),
       years = month_number / 12,
       year_number = ((month_number - 1) %/% 12) + 1,
       month_in_year = month_number - ((year_number - 1) * 12),
       
       # calculate rent
-      monthly_rent = input$rent * (1 + input$rent_appreciation / 100) ^ years,
+      monthly_rent = input$rent * (1 + input$rent_appreciation / 100) ^ year_number,
       cumulative_rent = cumsum(monthly_rent),
       
       # house buying costs
@@ -191,8 +191,8 @@ server <- function(input, output) {
       
       # calculate mortagage info
       monthly_payment = monthly_payment,
-      monthly_interest = mortgage_calcs$monthly_interest,
-      cumulative_principal_remaining = mortgage_calcs$remaining_principal,
+      monthly_interest = c(mortgage_cost * mortgage_rate_monthly, mortgage_calcs$monthly_interest),
+      cumulative_principal_remaining = c(mortgage_cost, mortgage_calcs$remaining_principal),
       cumulative_equity = mortgage_cost - cumulative_principal_remaining + input$down_payment,
       cumulative_payment = cumsum(monthly_payment),
       cumulative_interest = cumsum(monthly_interest),
