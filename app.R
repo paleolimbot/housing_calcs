@@ -55,22 +55,22 @@ ui <- fluidPage(
           min = 0,
           max = 3000,
           value = 1500,
-          step = 25
+          step = 50
         ),
         sliderInput(
           "rent_appreciation",
           "What is the approximate yearly cost of living increase (%)? (Applied to rent, utilities, maintenance)",
           min = 0,
-          max = 10,
-          value = 2, 
+          max = 6,
+          value = 1, 
           step = 0.1
         ),
          sliderInput(
            "price",
            "How much are you paying for the house?",
            min = 50000,
-           max = 500000,
-           value = 165000,
+           max = 600000,
+           value = 400000,
            step = 5000
         ),
         sliderInput(
@@ -92,8 +92,8 @@ ui <- fluidPage(
           "down_payment",
           "What is the down payment on the mortage?",
           min = 5000,
-          max = 50000,
-          value = 10000,
+          max = 100000,
+          value = 50000,
           step = 100
         ),
         sliderInput(
@@ -101,7 +101,8 @@ ui <- fluidPage(
           "What are the fixed costs associated with buying the house (deed transfer, legal, inspection, etc.)?",
           min = 0, 
           max = 20000,
-          value = 8000
+          value = 6000,
+          step = 100
         ),
         sliderInput(
           "utilities",
@@ -109,7 +110,7 @@ ui <- fluidPage(
           min = 0,
           max = 2000,
           value = 300,
-          step = 10
+          step = 50
         ),
         sliderInput(
           "maintenance",
@@ -117,21 +118,21 @@ ui <- fluidPage(
           min = 0,
           max = 2000,
           value = 400,
-          step = 10
+          step = 50
         ),
         sliderInput(
           "property_tax_rate",
           "What is the property tax rate (%)?",
           min = 0,
-          max = 20,
+          max = 10,
           value = 1.25,
           step = 0.25
         ),
         sliderInput(
           "appreciation",
           "What is the anticipated rate of property appreciation (%)?",
-          min = -10,
-          max = 10,
+          min = -6,
+          max = 6,
           value = 2,
           step = 0.1
         ),
@@ -140,7 +141,7 @@ ui <- fluidPage(
           "What percent will the real-estate agent take when you sell the house?",
           min = 0,
           max = 10,
-          value = 7,
+          value = 5,
           step = 0.5
         )
       ),
